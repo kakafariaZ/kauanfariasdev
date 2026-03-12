@@ -81,7 +81,7 @@ const Hero = () => {
                   display="flex"
                   justifyContent="center"
                 >
-                  <a href="/kauanfariasdev/kauan_farias_cv_2026.pdf" download>
+                  <a href="kauan_farias_cv_2026.pdf" download="Kauan_Farias_CV.pdf">
                     <StyledButton onClick={() => console.log("curriculo baixado")}>
                       <DownloadIcon />
                       <Typography>Currículo</Typography>
