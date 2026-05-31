@@ -1,4 +1,4 @@
-import Project1 from "../../../../assets/images/project1.png";
+import Project1 from "../../../../assets/images/project1.jpg";
 import Project2 from "../../../../assets/images/project2.png";
 import Project3 from "../../../../assets/images/project3.png";
 
@@ -124,7 +124,7 @@ const Projects = () => {
                 component="img"
                 height="200"
                 image={Project1}
-                alt="Sistema de Recarga"
+                alt="Labelu"
               />
 
               <CardContent>
@@ -133,7 +133,7 @@ const Projects = () => {
                   color="primary.contrastText"
                   gutterBottom
                 >
-                  Sistema de Recarga
+                  Labelu UX/UI
                 </Typography>
 
                 <Typography
@@ -141,8 +141,7 @@ const Projects = () => {
                   color="primary.contrastText"
                   sx={{ opacity: 1 }}
                 >
-                  Sistema distribuído para reserva de estações de recarga usando
-                  Go, MQTT e API REST.
+                Labelu: UX/UI Design  de ume labotório de estudos sobre luta de classes da UEFS.
                 </Typography>
 
                 <Box mt={2}>
@@ -150,11 +149,11 @@ const Projects = () => {
                     variant="contained"
                     size="small"
                     component="a"
-                    href="https://github.com/kakafariaZ/SmartCharge-Sistema-Recarga-Veiculos-Eletricos"
+                    href="https://ecompjr.github.io/pj-labelu/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    GitHub
+                    Link
                   </Button>
                 </Box>
               </CardContent>
@@ -217,7 +216,7 @@ const Projects = () => {
                   color="primary.contrastText"
                   gutterBottom
                 >
-                  Programa de Monitoria
+                  Fernanda Dayrell Advogada
                 </Typography>
 
                 <Typography
@@ -225,8 +224,7 @@ const Projects = () => {
                   color="primary.contrastText"
                   sx={{ opacity: 1 }}
                 >
-                  Sistema para gerenciamento de monitorias acadêmicas e
-                  acompanhamento de alunos.
+                  Site de apresentação de um Design System de uma advogada.
                 </Typography>
 
                 <Box mt={2}>
@@ -234,11 +232,11 @@ const Projects = () => {
                     variant="contained"
                     size="small"
                     component="a"
-                    href="https://geekprank.com/jurassic-park/"
+                    href="https://kakafariaz.github.io/FernandaDayrellAdvogada/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Material
+                    Link
                   </Button>
                 </Box>
               </CardContent>
