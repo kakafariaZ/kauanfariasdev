@@ -225,9 +225,10 @@ const NavButton = styled("button")({
 });
 
 const Projects = () => {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
+    // O operador '?.' (optional chaining) garante que só roda se a ref não for nula
     scrollRef.current?.scrollBy({ left: -384, behavior: "smooth" });
   };
 

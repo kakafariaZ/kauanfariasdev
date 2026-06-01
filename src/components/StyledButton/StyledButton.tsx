@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: "primary" | "ghost";
 }
 
