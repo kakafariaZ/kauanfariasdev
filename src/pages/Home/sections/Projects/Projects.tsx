@@ -1,250 +1,330 @@
+import { useRef } from "react";
+import { styled } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 import Project1 from "../../../../assets/images/project1.jpg";
 import Project2 from "../../../../assets/images/project2.png";
 import Project3 from "../../../../assets/images/project3.png";
 
-import { useRef } from "react";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+// --- Styled Components baseados na identidade do site ---
 
-import {
-  styled,
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Box,
-} from "@mui/material";
+const Section = styled("section")({
+  fontFamily: "'DM Sans', sans-serif",
+  background: "#00ffb4",
+  padding: "72px 40px",
+  borderRadius: "12px",
+  position: "relative",
+  overflow: "hidden",
 
-const StyledProjects = styled("section")(() => ({
-  background: `linear-gradient(180deg, #00a2ff 0%, #00fff2 100%)`,
   minHeight: "100vh",
-  paddingTop: "160px",
-  paddingBottom: "160px",
-}));
-
-const CardsContainer = styled(Box)(() => ({
   display: "flex",
-  gap: "40px",
+  margin: "0 auto", // Centraliza a seção caso esteja dentro de um container maior
+
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: "-120px",
+    right: "-120px",
+    width: "380px",
+    height: "380px",
+    borderRadius: "50%",
+    background: "rgba(0,0,0,0.05)",
+    pointerEvents: "none",
+  },
+  
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: "-80px",
+    left: "-60px",
+    width: "260px",
+    height: "260px",
+    borderRadius: "50%",
+    background: "rgba(0,0,0,0.04)",
+    pointerEvents: "none",
+  },
+
+  "@media (max-width: 900px)": {
+    paddingTop: "100px",
+    paddingBottom: "80px",
+  }
+});
+
+const ContentWrapper = styled("div")({
+  maxWidth: "1200px",
+  margin: "0 auto",
+  width: "100%",
+  position: "relative",
+  zIndex: 1,
+});
+
+const Header = styled("div")({
+  textAlign: "center",
+  marginBottom: "56px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+
+const SectionLabel = styled("p")({
+  fontSize: "11px",
+  fontWeight: 500,
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  color: "rgba(0,0,0,0.65)",
+  marginBottom: "16px",
+  fontFamily: "'DM Sans', sans-serif",
+});
+
+const Title = styled("h2")({
+  fontFamily: "'Syne', sans-serif",
+  fontSize: "clamp(36px, 6vw, 52px)",
+  fontWeight: 800,
+  color: "#000000",
+  letterSpacing: "-2px",
+  marginBottom: "16px",
+  lineHeight: 1.1,
+  "& span": { 
+    color: "rgba(0,0,0,0.3)",
+  },
+});
+ 
+const Subtitle = styled("p")({
+  fontSize: "16px",
+  fontWeight: 300,
+  color: "rgba(0,0,0,0.65)",
+  maxWidth: "460px",
+  lineHeight: 1.6,
+  fontFamily: "'DM Sans', sans-serif",
+});
+
+// --- Componentes do Slider e Cards ---
+const SliderContainer = styled("div")({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+});
+
+const CardsWrapper = styled("div")({
+  display: "flex",
+  gap: "24px",
   overflowX: "auto",
-  overflowY: "hidden",
   scrollBehavior: "smooth",
-  padding: "50px 40px",
-  scrollbarWidth: "none",
+  padding: "20px 4px",
+  scrollbarWidth: "none", // Oculta no Firefox
 
   "&::-webkit-scrollbar": {
-    display: "none",
+    display: "none", // Oculta no Chrome/Safari
   },
-}));
+});
 
-const StyledCard = styled(Card)(() => ({
+const ProjectCard = styled("div")({
   flex: "0 0 auto",
-  width: "420px",
-  background: "#ffffff",
-  color: "white",
-  borderRadius: "18px",
-  transition: "0.3s",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+  width: "360px",
+  background: "rgba(0, 7, 4, 0.13)",
+  border: "1px solid rgba(255,255,255,0.06)",
+  borderRadius: "16px",
+  padding: "16px",
+  display: "flex",
+  flexDirection: "column",
+  transition: "all 0.3s ease",
+
+  "@media (max-width: 600px)": {
+    width: "300px",
+  },
 
   "&:hover": {
-    transform: "translateY(-12px)",
-    boxShadow: "0 25px 50px rgba(0,0,0,0.6)",
+    background: "rgba(255,255,255,0.06)",
+    borderColor: "rgba(255,255,255,0.2)",
+    transform: "translateY(-6px)",
   },
-}));
+});
 
-const NavButton = styled(Button)(({ theme }) => ({
+const CardImage = styled("img")({
+  width: "100%",
+  height: "200px",
+  objectFit: "cover",
+  borderRadius: "12px",
+  marginBottom: "20px",
+});
+
+const CardContent = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
+});
+
+const CardTitle = styled("h3")({
+  fontFamily: "'Syne', sans-serif",
+  fontSize: "20px",
+  fontWeight: 700,
+  color: "rgba(0,0,0,0.65)",
+  marginBottom: "12px",
+  letterSpacing: "-0.5px",
+});
+
+const CardText = styled("p")({
+  fontSize: "14px",
+  fontWeight: 300,
+  color: "rgba(0,0,0,0.65)",
+  lineHeight: 1.6,
+  fontFamily: "'DM Sans', sans-serif",
+  marginBottom: "24px",
+});
+
+const StyledButton = styled("a")({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "10px 24px",
+  background: "#30443e29",
+  color: "rgba(0,0,0,0.65)",
+  fontFamily: "'DM Sans', sans-serif",
+  fontSize: "14px",
+  fontWeight: 600,
+  textDecoration: "none",
+  borderRadius: "8px",
+  transition: "all 0.2s ease",
+  marginTop: "auto",
+  alignSelf: "flex-start",
+
+  "&:hover": {
+    background: "#00cc90",
+    transform: "translateY(-2px)",
+  },
+});
+
+const NavButton = styled("button")({
   position: "absolute",
   top: "50%",
   transform: "translateY(-50%)",
-  minWidth: "50px",
-  height: "50px",
+  width: "48px",
+  height: "48px",
   borderRadius: "50%",
-  background: "#00a2be",
-  color: "white",
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  color: "#fff",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
   zIndex: 10,
+  transition: "all 0.2s ease",
 
   "&:hover": {
-    background: theme.palette.primary.dark,
+    background: "#00ffb4",
+    borderColor: "#00ffb4",
+    color: "#080c10",
   },
-}));
+
+  "& svg": {
+    fontSize: "20px",
+  },
+});
 
 const Projects = () => {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef(null);
 
   const scrollLeft = () => {
-    scrollRef.current?.scrollBy({
-      left: -450,
-      behavior: "smooth",
-    });
+    scrollRef.current?.scrollBy({ left: -384, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    scrollRef.current?.scrollBy({
-      left: 450,
-      behavior: "smooth",
-    });
+    scrollRef.current?.scrollBy({ left: 384, behavior: "smooth" });
   };
 
   return (
-    <StyledProjects id="projetos">
-      <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          color="primary.main"
-          textAlign="center"
-          sx={{ fontWeight: 700 }}
-          gutterBottom
-        >
-          Projetos
-        </Typography>
+    <Section id="projetos">
+      <ContentWrapper>
+        
+        <Header>
+          <SectionLabel>Portfólio</SectionLabel>
+          <Title>
+            Meus <span>Projetos</span>
+          </Title>
+          <Subtitle>
+            Alguns dos projetos mais recentes que desenvolvi aplicando meus conhecimentos.
+          </Subtitle>
+        </Header>
 
-        <Typography
-          variant="h4"
-          color="primary.main"
-          textAlign="center"
-          sx={{ opacity: 0.9 }}
-        >
-          Alguns projetos que desenvolvi
-        </Typography>
-
-        <Box position="relative" mt={6}>
-          <NavButton onClick={scrollRight} sx={{ right: "-20px" }}>
-            <ArrowForwardIosIcon />
-          </NavButton>
-
-          <NavButton onClick={scrollLeft} sx={{ left: "-20px" }}>
+        <SliderContainer>
+          {/* Botão Voltar */}
+          <NavButton onClick={scrollLeft} style={{ left: "-24px" }}>
             <ArrowBackIosNewIcon />
           </NavButton>
 
-          <CardsContainer ref={scrollRef}>
+          {/* Container de Scroll */}
+          <CardsWrapper ref={scrollRef}>
+            
             {/* Projeto 1 */}
-            <StyledCard>
-              <CardMedia
-                component="img"
-                height="200"
-                image={Project1}
-                alt="Labelu"
-              />
-
+            <ProjectCard>
+              <CardImage src={Project1} alt="Labelu" />
               <CardContent>
-                <Typography
-                  variant="h5"
-                  color="primary.contrastText"
-                  gutterBottom
+                <CardTitle>Labelu UX/UI</CardTitle>
+                <CardText>
+                  Labelu: UX/UI Design de um laboratório de estudos sobre luta
+                  de classes da UEFS.
+                </CardText>
+                <StyledButton
+                  href="https://ecompjr.github.io/pj-labelu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Labelu UX/UI
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  color="primary.contrastText"
-                  sx={{ opacity: 1 }}
-                >
-                Labelu: UX/UI Design  de ume labotório de estudos sobre luta de classes da UEFS.
-                </Typography>
-
-                <Box mt={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    component="a"
-                    href="https://ecompjr.github.io/pj-labelu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link
-                  </Button>
-                </Box>
+                  Acessar Projeto
+                </StyledButton>
               </CardContent>
-            </StyledCard>
+            </ProjectCard>
 
             {/* Projeto 2 */}
-            <StyledCard>
-              <CardMedia
-                component="img"
-                height="200"
-                image={Project2}
-                alt="Acervo Camcimba"
-              />
-
+            <ProjectCard>
+              <CardImage src={Project2} alt="Acervo Camcimba" />
               <CardContent>
-                <Typography
-                  variant="h5"
-                  color="primary.contrastText"
-                  gutterBottom
-                >
-                  Acervo Camcimba de História
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  color="primary.contrastText"
-                  sx={{ opacity: 1 }}
-                >
+                <CardTitle>Acervo Camcimba de História</CardTitle>
+                <CardText>
                   Plataforma para organização e visualização de acervos
                   históricos e culturais.
-                </Typography>
-
-                <Box mt={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    component="a"
-                    href="https://geppouefs.wixsite.com/uefs"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link
-                  </Button>
-                </Box>
+                </CardText>
+                <StyledButton
+                  href="https://geppouefs.wixsite.com/uefs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Acessar Projeto
+                </StyledButton>
               </CardContent>
-            </StyledCard>
+            </ProjectCard>
 
             {/* Projeto 3 */}
-            <StyledCard>
-              <CardMedia
-                component="img"
-                height="200"
-                image={Project3}
-                alt="Programa de Monitoria"
-              />
-
+            <ProjectCard>
+              <CardImage src={Project3} alt="Fernanda Dayrell Advogada" />
               <CardContent>
-                <Typography
-                  variant="h5"
-                  color="primary.contrastText"
-                  gutterBottom
+                <CardTitle>Fernanda Dayrell Advogada</CardTitle>
+                <CardText>
+                  Site de apresentação e Design System desenvolvido para uma
+                  advogada.
+                </CardText>
+                <StyledButton
+                  href="https://kakafariaz.github.io/FernandaDayrellAdvogada/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Fernanda Dayrell Advogada
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  color="primary.contrastText"
-                  sx={{ opacity: 1 }}
-                >
-                  Site de apresentação de um Design System de uma advogada.
-                </Typography>
-
-                <Box mt={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    component="a"
-                    href="https://kakafariaz.github.io/FernandaDayrellAdvogada/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link
-                  </Button>
-                </Box>
+                  Acessar Projeto
+                </StyledButton>
               </CardContent>
-            </StyledCard>
-          </CardsContainer>
-        </Box>
-      </Container>
-    </StyledProjects>
+            </ProjectCard>
+
+          </CardsWrapper>
+
+          {/* Botão Avançar */}
+          <NavButton onClick={scrollRight} style={{ right: "-24px" }}>
+            <ArrowForwardIosIcon />
+          </NavButton>
+        </SliderContainer>
+
+      </ContentWrapper>
+    </Section>
   );
 };
 

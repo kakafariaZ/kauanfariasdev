@@ -1,21 +1,23 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+// src/theme.ts
+import { createTheme } from "@mui/material/styles";
 
-let theme = createTheme({
+export const theme = createTheme({
   palette: {
-    primary: {
-      main: '#ffffff',
+    mode: "dark",
+    primary: { main: "#00ffb4" },
+    secondary: { main: "#5282ff" },
+    background: {
+      default: "#080c10",
+      paper: "rgba(255,255,255,0.03)",
     },
-    secondary: {
-      main: '#4f8e3e',
+    text: {
+      primary: "#e8eaf0",
+      secondary: "rgba(255,255,255,0.45)",
     },
-    },
-    typography: {
-        fontFamily: [
-            '"Segoe UI"',
-        ].join(','),
-    }
+  },
+  typography: {
+    fontFamily: "'DM Sans', sans-serif",
+  },
 });
-
-theme = responsiveFontSizes(theme);
 
 export default theme;
