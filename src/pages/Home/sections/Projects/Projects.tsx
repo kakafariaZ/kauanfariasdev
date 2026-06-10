@@ -12,7 +12,7 @@ import Project3 from "../../../../assets/images/project3.png";
 const Section = styled("section")({
   fontFamily: "'DM Sans', sans-serif",
   background: "#00ffb4",
-  padding: "72px 40px",
+  padding: "72px 40px", 
   borderRadius: "12px",
   position: "relative",
   overflow: "hidden",
@@ -288,7 +288,7 @@ const Projects = () => {
                   históricos e culturais.
                 </CardText>
                 <StyledButton
-                  href="https://geppouefs.wixsite.com/uefs"
+                  href="https://geppouefs.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
